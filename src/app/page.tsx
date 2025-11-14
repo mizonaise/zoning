@@ -1,65 +1,1132 @@
-import Image from "next/image";
+// app/page.tsx
+'use client'
 
-export default function Home() {
+import { ZoningData } from '@/types/zoning'
+import { ZoningScene } from '@/components/ZoningScene'
+import { ZoningProvider } from '@/contexts/ZoningContext'
+
+// Example zoning data
+const exampleZone: ZoningData = {
+  width: '($ZB_W + $ZL_D + $ZR_D) mm',
+  depth: '$ZONE_D mm',
+  height: '$ZONE_H mm',
+
+  zone: {
+    name: 'OAKSOME_SHAPE_U_04',
+    index: '0',
+    divDir: 'I',
+    linDiv: {
+      value: '3*{1}'
+    },
+    divElem: 0,
+    horDefType: 'P',
+    empty: false,
+    clickable: 'FRONT',
+    modifiable: false,
+    children: [
+      {
+        index: '0.0',
+        divDir: 'H',
+        linDiv: {
+          value: '1:$ZR_D mm'
+        },
+        divElem: 0,
+        horDefType: 'W',
+        empty: false,
+        clickable: 'FRONT',
+        modifiable: false,
+        children: [
+          {
+            index: '0.0.0',
+            divDir: 'V',
+            linDiv: {
+              value: ''
+            },
+            divElem: 0,
+            horDefType: 'P',
+            empty: true,
+            clickable: 'FRONT',
+            modifiable: false,
+            children: []
+          },
+          {
+            index: '0.0.1',
+            divDir: 'H',
+            linDiv: {
+              value: '1:($IS_BM_P * $ZB_D )mm'
+            },
+            divElem: 3,
+            horDefType: 'D',
+            empty: false,
+            clickable: 'FRONT',
+            modifiable: false,
+            children: [
+              {
+                index: '0.0.1.0',
+                divDir: 'H',
+                linDiv: {
+                  value: '1:((1 - $IS_BM_P )* $ZB_D + $ZR_W)mm'
+                },
+                divElem: 3,
+                horDefType: 'D',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: [
+                  {
+                    index: '0.0.1.0.0',
+                    divDir: 'V',
+                    linDiv: {
+                      value: ''
+                    },
+                    divElem: 0,
+                    horDefType: 'P',
+                    empty: true,
+                    clickable: 'FRONT',
+                    modifiable: false,
+                    children: []
+                  },
+                  {
+                    index: '0.0.1.0.1',
+                    divDir: 'H',
+                    linDiv: {
+                      value: '',
+                      conditions: [
+                        {
+                          value: '1:($ZR_CNT_01 * $ZR_STEP ) mm',
+                          nodenum: 1,
+                          operation: 0,
+                          comparisons: [
+                            {
+                              key: '0',
+                              value: '1-$IS_BM_P',
+                              operator: '='
+                            }
+                          ]
+                        },
+                        {
+                          value: '1:($ZB_D + $ZR_STEP ) mm',
+                          nodenum: 2,
+                          operation: 0,
+                          comparisons: [
+                            {
+                              key: '0',
+                              value: '1-$IS_BM_P',
+                              operator: '!='
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    divElem: 0,
+                    horDefType: 'D',
+                    empty: false,
+                    clickable: 'LEFT',
+                    modifiable: true,
+                    children: [
+                      {
+                        index: '0.0.1.0.1.0',
+                        divDir: 'H',
+                        linDiv: {
+                          value: '1:($ZR_CNT_02 * $ZR_STEP ) mm'
+                        },
+                        divElem: 0,
+                        horDefType: 'D',
+                        empty: false,
+                        clickable: 'FRONT',
+                        modifiable: false,
+                        children: [
+                          {
+                            index: '0.0.1.0.1.0.0',
+                            divDir: 'H',
+                            linDiv: {
+                              value: '1:($ZR_CNT_03 * $ZR_STEP ) mm'
+                            },
+                            divElem: 0,
+                            horDefType: 'D',
+                            empty: false,
+                            clickable: 'FRONT',
+                            modifiable: false,
+                            children: [
+                              {
+                                index: '0.0.1.0.1.0.0.0',
+                                divDir: 'H',
+                                linDiv: {
+                                  value: '1:($ZR_CNT_04* $ZR_STEP ) mm'
+                                },
+                                divElem: 0,
+                                horDefType: 'D',
+                                empty: false,
+                                clickable: 'FRONT',
+                                modifiable: false,
+                                children: [
+                                  {
+                                    index: '0.0.1.0.1.0.0.0.0',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  },
+                                  {
+                                    index: '0.0.1.0.1.0.0.0.1',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  }
+                                ]
+                              },
+                              {
+                                index: '0.0.1.0.1.0.0.1',
+                                divDir: 'H',
+                                linDiv: {
+                                  value: ''
+                                },
+                                divElem: 0,
+                                horDefType: 'P',
+                                empty: false,
+                                clickable: 'FRONT',
+                                modifiable: false,
+                                children: [
+                                  {
+                                    index: '0.0.1.0.1.0.0.1.0',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  },
+                                  {
+                                    index: '0.0.1.0.1.0.0.1.1',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            index: '0.0.1.0.1.0.1',
+                            divDir: 'V',
+                            linDiv: {
+                              value: ''
+                            },
+                            divElem: 0,
+                            horDefType: 'P',
+                            empty: false,
+                            clickable: 'FRONT',
+                            modifiable: false,
+                            children: []
+                          }
+                        ]
+                      },
+                      {
+                        index: '0.0.1.0.1.1',
+                        divDir: 'V',
+                        linDiv: {
+                          value: ''
+                        },
+                        divElem: 0,
+                        horDefType: 'P',
+                        empty: false,
+                        clickable: 'FRONT',
+                        modifiable: false,
+                        children: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                index: '0.0.1.1',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: true,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              }
+            ]
+          }
+        ]
+      },
+      {
+        index: '0.1',
+        divDir: 'H',
+        linDiv: {
+          value: '$ZL_D mm : 1'
+        },
+        divElem: 0,
+        horDefType: 'W',
+        empty: false,
+        clickable: 'FRONT',
+        modifiable: false,
+        children: [
+          {
+            index: '0.1.0',
+            divDir: 'H',
+            linDiv: {
+              value: '1:( $IS_BM_N * $ZB_D) mm'
+            },
+            divElem: 3,
+            horDefType: 'D',
+            empty: false,
+            clickable: 'FRONT',
+            modifiable: false,
+            children: [
+              {
+                index: '0.1.0.0',
+                divDir: 'H',
+                linDiv: {
+                  value: '1:((1 - $IS_BM_N )* $ZB_D + $ZL_W)mm'
+                },
+                divElem: 0,
+                horDefType: 'D',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: [
+                  {
+                    index: '0.1.0.0.0',
+                    divDir: 'V',
+                    linDiv: {
+                      value: ''
+                    },
+                    divElem: 0,
+                    horDefType: 'P',
+                    empty: true,
+                    clickable: 'FRONT',
+                    modifiable: false,
+                    children: []
+                  },
+                  {
+                    index: '0.1.0.0.1',
+                    divDir: 'H',
+                    linDiv: {
+                      value: '1:($ZL_CNT_01 * $ZL_STEP ) mm',
+                      conditions: [
+                        {
+                          value: '1:($ZL_CNT_01 * $ZL_STEP ) mm',
+                          nodenum: 1,
+                          operation: 0,
+                          comparisons: [
+                            {
+                              key: '0',
+                              value: '1-$IS_BM_N',
+                              operator: '='
+                            }
+                          ]
+                        },
+                        {
+                          value: '1:($ZB_D +  $ZL_STEP ) mm',
+                          nodenum: 2,
+                          operation: 0,
+                          comparisons: [
+                            {
+                              key: '0',
+                              value: '1-$IS_BM_N',
+                              operator: '!='
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    divElem: 0,
+                    horDefType: 'D',
+                    empty: false,
+                    clickable: 'RIGHT',
+                    modifiable: true,
+                    children: [
+                      {
+                        index: '0.1.0.0.1.0',
+                        divDir: 'H',
+                        linDiv: {
+                          value: '1:($ZL_CNT_02 * $ZL_STEP ) mm'
+                        },
+                        divElem: 0,
+                        horDefType: 'D',
+                        empty: false,
+                        clickable: 'FRONT',
+                        modifiable: false,
+                        children: [
+                          {
+                            index: '0.1.0.0.1.0.0',
+                            divDir: 'H',
+                            linDiv: {
+                              value: '1:($ZL_CNT_03 * $ZL_STEP ) mm'
+                            },
+                            divElem: 0,
+                            horDefType: 'D',
+                            empty: false,
+                            clickable: 'FRONT',
+                            modifiable: false,
+                            children: [
+                              {
+                                index: '0.1.0.0.1.0.0.0',
+                                divDir: 'H',
+                                linDiv: {
+                                  value: '1:($ZL_CNT_04 * $ZL_STEP ) mm'
+                                },
+                                divElem: 0,
+                                horDefType: 'D',
+                                empty: false,
+                                clickable: 'FRONT',
+                                modifiable: false,
+                                children: []
+                              },
+                              {
+                                index: '0.1.0.0.1.0.0.1',
+                                divDir: 'V',
+                                linDiv: {
+                                  value: ''
+                                },
+                                divElem: 0,
+                                horDefType: 'P',
+                                empty: false,
+                                clickable: 'FRONT',
+                                modifiable: false,
+                                children: [
+                                  {
+                                    index: '0.1.0.0.1.0.0.1.0',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  },
+                                  {
+                                    index: '0.1.0.0.1.0.0.1.1',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  }
+                                ]
+                              }
+                            ]
+                          },
+                          {
+                            index: '0.1.0.0.1.0.1',
+                            divDir: 'V',
+                            linDiv: {
+                              value: ''
+                            },
+                            divElem: 0,
+                            horDefType: 'P',
+                            empty: false,
+                            clickable: 'FRONT',
+                            modifiable: false,
+                            children: []
+                          }
+                        ]
+                      },
+                      {
+                        index: '0.1.0.0.1.1',
+                        divDir: 'V',
+                        linDiv: {
+                          value: ''
+                        },
+                        divElem: 0,
+                        horDefType: 'P',
+                        empty: false,
+                        clickable: 'FRONT',
+                        modifiable: false,
+                        children: []
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                index: '0.1.0.1',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: true,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.2',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.3',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.4',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.5',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.6',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.7',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.1.0.8',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              }
+            ]
+          },
+          {
+            index: '0.1.1',
+            divDir: 'V',
+            linDiv: {
+              value: ''
+            },
+            divElem: 0,
+            horDefType: 'P',
+            empty: true,
+            clickable: 'FRONT',
+            modifiable: false,
+            children: []
+          }
+        ]
+      },
+      {
+        index: '0.2',
+        divDir: 'H',
+        linDiv: {
+          value: '1:$ZB_D mm'
+        },
+        divElem: 3,
+        horDefType: 'D',
+        empty: false,
+        clickable: 'FRONT',
+        modifiable: false,
+        children: [
+          {
+            index: '0.2.0',
+            divDir: 'V',
+            linDiv: {
+              value: ''
+            },
+            divElem: 0,
+            horDefType: 'P',
+            empty: true,
+            clickable: 'FRONT',
+            modifiable: false,
+            children: []
+          },
+          {
+            index: '0.2.1',
+            divDir: 'H',
+            linDiv: {
+              value: '((1- $IS_BM_N )* $ZL_D) mm : 1: ((1-$IS_BM_P) * $ZR_D) mm'
+            },
+            divElem: 1,
+            horDefType: 'W',
+            empty: false,
+            clickable: 'FRONT',
+            modifiable: false,
+            children: [
+              {
+                index: '0.2.1.0',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: true,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.1',
+                divDir: 'H',
+                linDiv: {
+                  value: '',
+                  conditions: [
+                    {
+                      value: '($ZL_D + $ZB_STEP ) mm:1:($ZR_D + $ZB_STEP ) mm',
+                      nodenum: 1,
+                      operation: 0,
+                      comparisons: [
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_N',
+                          operator: '='
+                        },
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_P',
+                          operator: '='
+                        }
+                      ]
+                    },
+                    {
+                      value: '($ZL_D + $ZB_STEP ) mm:1:0',
+                      nodenum: 2,
+                      operation: 0,
+                      comparisons: [
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_N',
+                          operator: '='
+                        },
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_P',
+                          operator: '!='
+                        }
+                      ]
+                    },
+                    {
+                      value: '0:1:($ZR_D + $ZB_STEP )mm',
+                      nodenum: 3,
+                      operation: 0,
+                      comparisons: [
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_N',
+                          operator: '!='
+                        },
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_P',
+                          operator: '='
+                        }
+                      ]
+                    },
+                    {
+                      value: '($ZB_CNT_01 * $ZB_STEP ) mm:1:0',
+                      nodenum: 4,
+                      operation: 0,
+                      comparisons: [
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_N',
+                          operator: '!='
+                        },
+                        {
+                          key: '0',
+                          value: '1-$IS_BM_P',
+                          operator: '!='
+                        }
+                      ]
+                    }
+                  ]
+                },
+                divElem: 0,
+                horDefType: 'W',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: true,
+                children: [
+                  {
+                    index: '0.2.1.1.0',
+                    divDir: 'V',
+                    linDiv: {
+                      value: ''
+                    },
+                    divElem: 0,
+                    horDefType: 'P',
+                    empty: false,
+                    clickable: 'FRONT',
+                    modifiable: false,
+                    children: []
+                  },
+                  {
+                    index: '0.2.1.1.1',
+                    divDir: 'H',
+                    linDiv: {
+                      value: '($ZB_CNT_02 * $ZB_STEP ) mm:1'
+                    },
+                    divElem: 0,
+                    horDefType: 'W',
+                    empty: false,
+                    clickable: 'FRONT',
+                    modifiable: false,
+                    children: [
+                      {
+                        index: '0.2.1.1.1.0',
+                        divDir: 'V',
+                        linDiv: {
+                          value: ''
+                        },
+                        divElem: 0,
+                        horDefType: 'P',
+                        empty: false,
+                        clickable: 'FRONT',
+                        modifiable: false,
+                        children: []
+                      },
+                      {
+                        index: '0.2.1.1.1.1',
+                        divDir: 'H',
+                        linDiv: {
+                          value: '($ZB_CNT_03 * $ZB_STEP ) mm:1'
+                        },
+                        divElem: 0,
+                        horDefType: 'W',
+                        empty: false,
+                        clickable: 'FRONT',
+                        modifiable: false,
+                        children: [
+                          {
+                            index: '0.2.1.1.1.1.0',
+                            divDir: 'V',
+                            linDiv: {
+                              value: ''
+                            },
+                            divElem: 0,
+                            horDefType: 'P',
+                            empty: false,
+                            clickable: 'FRONT',
+                            modifiable: false,
+                            children: []
+                          },
+                          {
+                            index: '0.2.1.1.1.1.1',
+                            divDir: 'H',
+                            linDiv: {
+                              value: '($ZB_CNT_04 * $ZB_STEP ) mm:1'
+                            },
+                            divElem: 0,
+                            horDefType: 'W',
+                            empty: false,
+                            clickable: 'FRONT',
+                            modifiable: false,
+                            children: [
+                              {
+                                index: '0.2.1.1.1.1.1.0',
+                                divDir: 'V',
+                                linDiv: {
+                                  value: ''
+                                },
+                                divElem: 0,
+                                horDefType: 'P',
+                                empty: false,
+                                clickable: 'FRONT',
+                                modifiable: false,
+                                children: []
+                              },
+                              {
+                                index: '0.2.1.1.1.1.1.1',
+                                divDir: 'H',
+                                linDiv: {
+                                  value: '($ZB_CNT_05 * $ZB_STEP ) mm:1'
+                                },
+                                divElem: 0,
+                                horDefType: 'W',
+                                empty: false,
+                                clickable: 'FRONT',
+                                modifiable: false,
+                                children: [
+                                  {
+                                    index: '0.2.1.1.1.1.1.1.0',
+                                    divDir: 'V',
+                                    linDiv: {
+                                      value: ''
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'P',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: []
+                                  },
+                                  {
+                                    index: '0.2.1.1.1.1.1.1.1',
+                                    divDir: 'H',
+                                    linDiv: {
+                                      value: '($ZB_CNT_06 * $ZB_STEP ) mm:1'
+                                    },
+                                    divElem: 0,
+                                    horDefType: 'W',
+                                    empty: false,
+                                    clickable: 'FRONT',
+                                    modifiable: false,
+                                    children: [
+                                      {
+                                        index: '0.2.1.1.1.1.1.1.1.0',
+                                        divDir: 'V',
+                                        linDiv: {
+                                          value: ''
+                                        },
+                                        divElem: 0,
+                                        horDefType: 'P',
+                                        empty: false,
+                                        clickable: 'FRONT',
+                                        modifiable: false,
+                                        children: []
+                                      },
+                                      {
+                                        index: '0.2.1.1.1.1.1.1.1.1',
+                                        divDir: 'H',
+                                        linDiv: {
+                                          value: '($ZB_CNT_07 * $ZB_STEP ) mm:1'
+                                        },
+                                        divElem: 0,
+                                        horDefType: 'W',
+                                        empty: false,
+                                        clickable: 'FRONT',
+                                        modifiable: false,
+                                        children: [
+                                          {
+                                            index: '0.2.1.1.1.1.1.1.1.1.0',
+                                            divDir: 'V',
+                                            linDiv: {
+                                              value: ''
+                                            },
+                                            divElem: 0,
+                                            horDefType: 'P',
+                                            empty: false,
+                                            clickable: 'FRONT',
+                                            modifiable: false,
+                                            children: []
+                                          },
+                                          {
+                                            index: '0.2.1.1.1.1.1.1.1.1.1',
+                                            divDir: 'H',
+                                            linDiv: {
+                                              value:
+                                                '($ZB_CNT_07 * $ZB_STEP ) mm:1'
+                                            },
+                                            divElem: 0,
+                                            horDefType: 'W',
+                                            empty: false,
+                                            clickable: 'FRONT',
+                                            modifiable: false,
+                                            children: [
+                                              {
+                                                index:
+                                                  '0.2.1.1.1.1.1.1.1.1.1.0',
+                                                divDir: 'V',
+                                                linDiv: {
+                                                  value: ''
+                                                },
+                                                divElem: 0,
+                                                horDefType: 'P',
+                                                empty: false,
+                                                clickable: 'FRONT',
+                                                modifiable: false,
+                                                children: []
+                                              },
+                                              {
+                                                index:
+                                                  '0.2.1.1.1.1.1.1.1.1.1.1',
+                                                divDir: 'V',
+                                                linDiv: {
+                                                  value: ''
+                                                },
+                                                divElem: 0,
+                                                horDefType: 'P',
+                                                empty: false,
+                                                clickable: 'FRONT',
+                                                modifiable: false,
+                                                children: []
+                                              }
+                                            ]
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    index: '0.2.1.1.2',
+                    divDir: 'V',
+                    linDiv: {
+                      value: ''
+                    },
+                    divElem: 0,
+                    horDefType: 'P',
+                    empty: false,
+                    clickable: 'FRONT',
+                    modifiable: false,
+                    children: []
+                  }
+                ]
+              },
+              {
+                index: '0.2.1.10',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.2',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: true,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.3',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.4',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.5',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.6',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.7',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.8',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              },
+              {
+                index: '0.2.1.9',
+                divDir: 'V',
+                linDiv: {
+                  value: ''
+                },
+                divElem: 0,
+                horDefType: 'P',
+                empty: false,
+                clickable: 'FRONT',
+                modifiable: false,
+                children: []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  variables: {
+    ZB_W: '4000',
+    ZL_D: '500',
+    ZR_D: '500',
+    ZONE_D: '4000',
+    ZONE_H: '3000',
+    ZB_D: '500',
+    IS_BM_N: '0',
+    IS_BM_P: '1',
+    ZR_W: '3000',
+    ZL_W: '2000',
+    ZB_STEP: '$ZB_W/$ZB_CNT',
+    ZL_CNT_01: '1',
+    ZL_STEP: '$ZL_W / $ZL_CNT',
+    ZR_CNT_01: '2',
+    ZR_STEP: '$ZR_W / $ZR_CNT',
+    ZB_CNT: '10',
+    ZL_CNT: '4',
+    ZL_CNT_02: '2',
+    ZB_CNT_01: '1',
+    ZL_CNT_03: '1',
+    ZR_CNT: '5',
+    ZB_CNT_02: '1',
+    ZL_CNT_04: '2',
+    ZR_CNT_02: '1',
+    ZB_CNT_03: '2',
+    ZR_CNT_03: '2',
+    ZB_CNT_04: '1',
+    ZR_CNT_04: '1',
+    ZB_CNT_05: '2',
+    ZB_CNT_06: '1',
+    ZB_CNT_07: '1'
+  }
+}
+
+export default function Home () {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <ZoningProvider initialZone={exampleZone}>
+      <div className='w-full h-screen relative'>
+        <ZoningScene />
+      </div>
+    </ZoningProvider>
+  )
 }

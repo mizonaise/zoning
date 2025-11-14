@@ -1,0 +1,46 @@
+{
+  "scene_01": {
+    "base": "/assets/scene/Cabinet/Japandi_camera_1.png",
+    "door": {
+      "Door_01": "/assets/scene/Doors/Doors_01.png",
+      "Door_02": "/assets/scene/Doors/Doors_02.png",
+      "Door_03": "/assets/scene/Doors/Doors_03.png",
+      "Door_04": "/assets/scene/Doors/Doors_04.png",
+      "Door_05": "/assets/scene/Doors/Doors_05.png",
+      "Door_06": "/assets/scene/Doors/Doors_06.png",
+      "Door_07": "/assets/scene/Doors/Doors_07.png"
+    },
+    "handle": {
+      "Handle_01": "/assets/scene/Handle/Handle_01.png",
+      "Handle_02": "/assets/scene/Handle/Handle_02.png",
+      "Handle_03": "/assets/scene/Handle/Handle_03.png",
+      "Handle_04": "/assets/scene/Handle/Handle_04.png",
+      "Handle_05": "/assets/scene/Handle/Handle_05.png",
+      "Handle_06": "/assets/scene/Handle/Handle_06.png",
+      "Handle_07": "/assets/scene/Handle/Handle_07.png",
+      "Handle_08": "/assets/scene/Handle/Handle_08.png",
+      "Handle_09": "/assets/scene/Handle/Handle_09.png",
+      "Handle_10": "/assets/scene/Handle/Handle_10.png"
+    }
+  },
+  "scene_02": {
+    "base": "/assets/scene/Cabinet/Japandi.png",
+    "door": {
+      "Door_08": "/assets/scene/Doors/Door_Alpaca FD47.png",
+      "Door_09": "/assets/scene/Doors/Door_bondi.png",
+      "Door_10": "/assets/scene/Doors/Door_Cannage.png",
+      "Door_11": "/assets/scene/Doors/Door_ivory.png",
+      "Door_12": "/assets/scene/Doors/Door_ivory_infinity.png",
+      "Door_13": "/assets/scene/Doors/Door_milk.png",
+      "Door_14": "/assets/scene/Doors/Door_polyrer_CA3A.png"
+    },
+    "handle": {
+      "Handle_16": "/assets/scene/Handle/Handle_006.png",
+      "Handle_17": "/assets/scene/Handle/Handle_007.png",
+      "Handle_18": "/assets/scene/Handle/Handle_009.png",
+      "Handle_19": "/assets/scene/Handle/Handle_010.png",
+      "Handle_20": "/assets/scene/Handle/Handle_012.png",
+      "Handle_21": "/assets/scene/Handle/Handle_Viefe.png"
+    }
+  }
+}
